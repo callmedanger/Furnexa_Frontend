@@ -8,6 +8,19 @@ const VALID_ADMIN_CREDENTIALS = {
   'idraak@admin.com': 'idraakfurnexa',
 };
 const AUTH_STORAGE_KEY = 'furnexa-admin-authenticated';
+const USER_NAME_KEY = 'furnexa-admin-user-name';
+
+const getDisplayNameFromEmail = (email) => {
+  const localPart = email.split('@')[0] || 'Admin';
+
+  const formattedName = localPart
+    .split(/[._-]/)
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+    .join(' ');
+
+  return formattedName || 'Admin';
+};
 
 const Login = () => {
   const navigate = useNavigate();
@@ -31,6 +44,7 @@ const Login = () => {
     }
 
     sessionStorage.setItem(AUTH_STORAGE_KEY, 'true');
+    sessionStorage.setItem(USER_NAME_KEY, getDisplayNameFromEmail(normalizedEmail));
     navigate('/', { replace: true });
   };
 
@@ -90,5 +104,5 @@ const Login = () => {
   );
 };
 
-export { AUTH_STORAGE_KEY };
+export { AUTH_STORAGE_KEY, USER_NAME_KEY };
 export default Login;

@@ -2,15 +2,23 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Bell, ChevronDown, LogOut, Settings } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
-import { AUTH_STORAGE_KEY } from '../pages/Login';
+import { AUTH_STORAGE_KEY, USER_NAME_KEY } from '../pages/Login';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [profileOpen, setProfileOpen] = useState(false);
   const notificationCount = 3;
+  const loggedInUser = sessionStorage.getItem(USER_NAME_KEY) || 'Admin';
+  const userInitials = loggedInUser
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part.charAt(0).toUpperCase())
+    .join('') || 'A';
 
   const handleLogout = () => {
     sessionStorage.removeItem(AUTH_STORAGE_KEY);
+    sessionStorage.removeItem(USER_NAME_KEY);
     navigate('/login', { replace: true });
   };
 
@@ -63,10 +71,10 @@ const Navbar = () => {
             className="flex items-center gap-3 px-1.5 py-1 rounded-lg hover:bg-[#F6F2EC] dark:hover:bg-white/10 transition-colors"
           >
             <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#C98A3D] to-[#A8672A] flex items-center justify-center text-white text-sm font-medium flex-shrink-0">
-              A
+              {userInitials}
             </div>
             <div className="leading-tight text-left hidden sm:block">
-              <p className="text-sm font-medium text-[#2E2118] dark:text-[#E8DFD3]">Admin</p>
+              <p className="text-sm font-medium text-[#2E2118] dark:text-[#E8DFD3]">{loggedInUser}</p>
               <p className="text-xs text-[#A99A82]">Furnexa Team</p>
             </div>
             <ChevronDown
