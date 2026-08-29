@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { Bell, Check, LockKeyhole, Palette, UserRound } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import { USER_EMAIL_KEY, USER_NAME_KEY } from './Login';
 
 const Settings = () => {
   const { theme, toggleTheme } = useTheme();
   const [emailAlerts, setEmailAlerts] = useState(true);
   const [saved, setSaved] = useState(false);
+  const loggedInName = sessionStorage.getItem(USER_NAME_KEY) || 'Admin';
+  const loggedInEmail = sessionStorage.getItem(USER_EMAIL_KEY) || 'furnexa@admin.com';
 
   const handleSave = (event) => {
     event.preventDefault();
@@ -30,8 +33,8 @@ const Settings = () => {
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <label className="text-sm text-[#5C4A3A] dark:text-[#C9BBA4]">Name<input value="Admin" readOnly className="mt-2 w-full rounded-lg border border-[#EDE6DA] dark:border-white/10 bg-[#FAF8F5] dark:bg-white/5 px-3 py-2.5 text-sm text-[#2E2118] dark:text-[#F0EAE0] outline-none" /></label>
-            <label className="text-sm text-[#5C4A3A] dark:text-[#C9BBA4]">Email<input value="furnexa@admin.com" readOnly className="mt-2 w-full rounded-lg border border-[#EDE6DA] dark:border-white/10 bg-[#FAF8F5] dark:bg-white/5 px-3 py-2.5 text-sm text-[#2E2118] dark:text-[#F0EAE0] outline-none" /></label>
+            <label className="text-sm text-[#5C4A3A] dark:text-[#C9BBA4]">Name<input value={loggedInName} readOnly className="mt-2 w-full rounded-lg border border-[#EDE6DA] dark:border-white/10 bg-[#FAF8F5] dark:bg-white/5 px-3 py-2.5 text-sm text-[#2E2118] dark:text-[#F0EAE0] outline-none" /></label>
+            <label className="text-sm text-[#5C4A3A] dark:text-[#C9BBA4]">Email<input value={loggedInEmail} readOnly className="mt-2 w-full rounded-lg border border-[#EDE6DA] dark:border-white/10 bg-[#FAF8F5] dark:bg-white/5 px-3 py-2.5 text-sm text-[#2E2118] dark:text-[#F0EAE0] outline-none" /></label>
           </div>
         </section>
 
