@@ -14,6 +14,10 @@ const USER_EMAIL_KEY = 'furnexa-admin-user-email';
 const getDisplayNameFromEmail = (email) => {
   const localPart = (email || '').split('@')[0] || 'Admin';
 
+  if (localPart.toLowerCase() === 'abdulrehman') {
+    return 'Abdul Rehman';
+  }
+
   const formattedName = localPart
     .split(/[._-]/)
     .filter(Boolean)
