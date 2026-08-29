@@ -9,9 +9,10 @@ const VALID_ADMIN_CREDENTIALS = {
 };
 const AUTH_STORAGE_KEY = 'furnexa-admin-authenticated';
 const USER_NAME_KEY = 'furnexa-admin-user-name';
+const USER_EMAIL_KEY = 'furnexa-admin-user-email';
 
 const getDisplayNameFromEmail = (email) => {
-  const localPart = email.split('@')[0] || 'Admin';
+  const localPart = (email || '').split('@')[0] || 'Admin';
 
   const formattedName = localPart
     .split(/[._-]/)
@@ -44,6 +45,7 @@ const Login = () => {
     }
 
     sessionStorage.setItem(AUTH_STORAGE_KEY, 'true');
+    sessionStorage.setItem(USER_EMAIL_KEY, normalizedEmail);
     sessionStorage.setItem(USER_NAME_KEY, getDisplayNameFromEmail(normalizedEmail));
     navigate('/', { replace: true });
   };
@@ -104,5 +106,5 @@ const Login = () => {
   );
 };
 
-export { AUTH_STORAGE_KEY, USER_NAME_KEY };
+export { AUTH_STORAGE_KEY, USER_NAME_KEY, USER_EMAIL_KEY, getDisplayNameFromEmail };
 export default Login;

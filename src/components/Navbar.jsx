@@ -2,13 +2,15 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Bell, ChevronDown, LogOut, Settings } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
-import { AUTH_STORAGE_KEY, USER_NAME_KEY } from '../pages/Login';
+import { AUTH_STORAGE_KEY, USER_EMAIL_KEY, USER_NAME_KEY, getDisplayNameFromEmail } from '../pages/Login';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [profileOpen, setProfileOpen] = useState(false);
   const notificationCount = 3;
-  const loggedInUser = sessionStorage.getItem(USER_NAME_KEY) || 'Admin';
+  const storedName = sessionStorage.getItem(USER_NAME_KEY);
+  const storedEmail = sessionStorage.getItem(USER_EMAIL_KEY);
+  const loggedInUser = storedName || getDisplayNameFromEmail(storedEmail) || 'Admin';
   const userInitials = loggedInUser
     .split(/\s+/)
     .filter(Boolean)
@@ -19,6 +21,7 @@ const Navbar = () => {
   const handleLogout = () => {
     sessionStorage.removeItem(AUTH_STORAGE_KEY);
     sessionStorage.removeItem(USER_NAME_KEY);
+    sessionStorage.removeItem(USER_EMAIL_KEY);
     navigate('/login', { replace: true });
   };
 
