@@ -9,7 +9,7 @@ import { AUTH_STORAGE_KEY } from '../pages/Login';
 
 const navGroups = [
   {
-    label: 'abdulrehman',
+    label: 'Overview',
     items: [{ label: 'Dashboard', path: '/', icon: LayoutDashboard }],
   },
   {

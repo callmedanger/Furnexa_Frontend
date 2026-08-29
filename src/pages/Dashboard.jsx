@@ -160,7 +160,7 @@ const Dashboard = () => {
       {/* KPI Row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         <StatCard
-          title="Total Revenue"
+          title="abcabc"
           value={`Rs. ${totalRevenue.toLocaleString()}`}
           icon={Wallet}
           gradient="bg-gradient-to-br from-[#7A9B76] to-[#5A7A56]"
