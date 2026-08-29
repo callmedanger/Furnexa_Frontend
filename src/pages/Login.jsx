@@ -3,7 +3,6 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import furnexaLogo from '../assets/furnexa.jpeg';
 
 const VALID_ADMIN_CREDENTIALS = {
-  'furnexa@crm.com': 'furnexa2008',
   'abdulrehman@admin.com': 'abdulcrm123',
   'hamza@admin.com': 'hamzafurnexa',
   'idraak@admin.com': 'idraakfurnexa',
