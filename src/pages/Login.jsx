@@ -2,8 +2,12 @@ import { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import furnexaLogo from '../assets/furnexa.jpeg';
 
-const ADMIN_EMAIL = 'furnexa@crm.com';
-const ADMIN_PASSWORD = 'furnexa2008';
+const VALID_ADMIN_CREDENTIALS = {
+  'furnexa@crm.com': 'furnexa2008',
+  'abdulrehman@admin.com': 'abdulcrm123',
+  'hamza@admin.com': 'hamzafurnexa',
+  'idraak@admin.com': 'idraakfurnexa',
+};
 const AUTH_STORAGE_KEY = 'furnexa-admin-authenticated';
 
 const Login = () => {
@@ -19,7 +23,10 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (email.trim().toLowerCase() !== ADMIN_EMAIL || password !== ADMIN_PASSWORD) {
+    const normalizedEmail = email.trim().toLowerCase();
+    const storedPassword = VALID_ADMIN_CREDENTIALS[normalizedEmail];
+
+    if (!storedPassword || password !== storedPassword) {
       setError('Invalid admin email or password.');
       return;
     }
