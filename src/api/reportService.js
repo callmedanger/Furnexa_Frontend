@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 export const generateAIReport = async ({ users, orders, products, feedbacks }) => {
-  const response = await axios.post(`${API_URL}/api/reports/generate-report`, {
+  const response = await axios.post(`${API_URL}/reports/generate-report`, {
     users,
     orders,
     products,
@@ -13,7 +13,7 @@ export const generateAIReport = async ({ users, orders, products, feedbacks }) =
 };
 
 export const chatWithAI = async ({ messages, users, orders, products, feedbacks }) => {
-  const response = await axios.post(`${API_URL}/api/reports/chat`, {
+  const response = await axios.post(`${API_URL}/reports/chat`, {
     messages,
     users,
     orders,
